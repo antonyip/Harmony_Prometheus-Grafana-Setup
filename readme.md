@@ -122,8 +122,8 @@ Browser: localhost:3000
 default
 username: admin
 password: admin
-![Grafana](./img/grafana.png)
 ```
+![Grafana](./img/grafana.png)
 
 12. Add Prometheus as a Data Source  
 ![Prometheus Data](./img/prom_data.png)
