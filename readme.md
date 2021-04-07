@@ -122,33 +122,40 @@ Browser: localhost:3000
 default
 username: admin
 password: admin
-```
 ![Grafana](./img/grafana.png)
+```
 
-12. Add Prometheus as a Data Source
+12. Add Prometheus as a Data Source  
 ![Prometheus Data](./img/prom_data.png)
 
 # Setup of Telegram Alerts
-13. Search for "chat id echo"
+13. Search for "chat id echo"  
 ![Chat ID Echo](./img/chatid.png)
 
-14. Get your ChatID by typing start
+14. Get your ChatID by typing start  
 ![Chat ID Echo](./img/chatid_start.png)
 
-15. Search for Botfather on twitter
+15. Search for Botfather on twitter  
 ![BotFather](./img/botfather.png)
 
-16. Make a new bot and get the api token
+16. Make a new bot and get the api token  
 ![New Bot](./img/newbot.png)
 
-17. Start your bot
+17. Start your bot  
 ![Start Bot](./img/startbot.png)
 
-18. Enter details into grafana page
+18. Enter details into grafana page  
 ![grafana details](./img/grafana_telegram.png)
 
-19. Send the test Alert
+19. Send the test Alert  
 ![Start Bot](./img/test_telegram.png)
 
-# Setup of Discord Alerts
+# Setup of Discord Alerts  
+20. Create a Webook in your server  
+![Webhook](./img/discord_webhook.png)
 
+21. Enter details into grafana page  
+![grafana details](./img/grafana_discord.png)
+
+22. Send the test Alert  
+![grafana discord test](./img/grafana_test.png)
