@@ -55,16 +55,27 @@ Started RPC server at: 127.0.0.1:9500
 Started WS server at: 127.0.0.1:9800
 ```
 
-6. Curl to check if docker is running correctly
+6. Curl to check if harmony node is running correctly
 ```
-user@ubuntu:~$ curl localhost:9090
-<a href="/graph">Found</a>.
+user@ubuntu:~$ curl localhost:9900/metrics | grep ^hmy
+.
+.
+.
+hmy_stream_setup_stream_duration_bucket{topic="harmony/sync/localnet/0/1.0.0",le="0.32"} 783
+hmy_stream_setup_stream_duration_bucket{topic="harmony/sync/localnet/0/1.0.0",le="0.64"} 783
+hmy_stream_setup_stream_duration_bucket{topic="harmony/sync/localnet/0/1.0.0",le="1.28"} 783
+hmy_stream_setup_stream_duration_bucket{topic="harmony/sync/localnet/0/1.0.0",le="2.56"} 783
+hmy_stream_setup_stream_duration_bucket{topic="harmony/sync/localnet/0/1.0.0",le="+Inf"} 783
+hmy_stream_setup_stream_duration_sum{topic="harmony/sync/localnet/0/1.0.0"} 1.2891841450000003
+hmy_stream_setup_stream_duration_count{topic="harmony/sync/localnet/0/1.0.0"} 783
 ```
 
 # Setup of Prometheus
 7. Download and Unzip Prometheus from https://prometheus.io/download/
 
 8. Change Configuration Settings for Prometheus
+For me, my harmony node is running on "192.168.106.143"
+Change your settings to fit what you need.
 ```
 # my global config
 global:
@@ -94,13 +105,19 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-    - targets: ['localhost:9900']
+    - targets: ['192.168.106.143:9900']
 
 ```
+
+Run it
+```
+user@ubuntu:~/Downloads/prometheus-2.26.0.linux-amd64$ ./prometheus
+```
+
 
 9. Test that the Prometheus site is working
 ```
-Visit localhost:9090
+Visit http://192.168.106.144:9090 -> Remember that you need to use your own prometheus server ip
 You can enter up in the execute as shown in the picture below
 ```
 ![Prometheus](./img/prometheus.png)
@@ -118,7 +135,7 @@ user@ubuntu:~$ sudo /bin/systemctl start grafana-server
 
 11. Test that grafana works
 ```
-Browser: localhost:3000
+Browser:  http://192.168.106.144:3000
 default
 username: admin
 password: admin
