@@ -159,3 +159,10 @@ password: admin
 
 22. Send the test Alert  
 ![grafana discord test](./img/grafana_test.png)
+
+# Importing a grafana dashboard
+23. Import my dashboard here..
+![grafana discord test](./img/importdashboard.png)
+
+24. Download the hmy.json and upload it to see what I created.
+
