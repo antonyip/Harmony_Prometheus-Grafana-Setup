@@ -73,9 +73,9 @@ hmy_stream_setup_stream_duration_count{topic="harmony/sync/localnet/0/1.0.0"} 78
 # Setup of Prometheus
 7. Download and Unzip Prometheus from https://prometheus.io/download/
 
-8. Change Configuration Settings for Prometheus
-For me, my harmony node is running on "192.168.106.143"
-Change your settings to fit what you need.
+8. Change Configuration Settings for Prometheus  
+For me, my harmony node is running on "192.168.106.143"  
+Change your settings to fit what you need.  
 ```
 # my global config
 global:
@@ -117,7 +117,7 @@ user@ubuntu:~/Downloads/prometheus-2.26.0.linux-amd64$ ./prometheus
 
 9. Test that the Prometheus site is working
 ```
-Visit http://192.168.106.144:9090 -> Remember that you need to use your own prometheus server ip
+Visit http://192.168.106.144:9090 -> Remember that you need to use your own prometheus server ip  
 You can enter up in the execute as shown in the picture below
 ```
 ![Prometheus](./img/prometheus.png)
@@ -178,8 +178,194 @@ password: admin
 ![grafana discord test](./img/grafana_test.png)
 
 # Importing a grafana dashboard
-23. Import my dashboard here..
+23. Import my dashboard here..  
 ![grafana discord test](./img/importdashboard.png)
 
-24. Download the hmy.json and upload it to see what I created.
+24. copy and paste the hmy.json into panel.json and upload it to see what I created.  
+```
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "Monitoring Dashboard",
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 1,
+    "links": [],
+    "panels": [
+      {
+        "collapsed": true,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "panels": [],
+        "title": "Status",
+        "type": "row"
+      },
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 6,
+          "x": 0,
+          "y": 1
+        },
+        "id": 4,
+        "options": {
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "text": {}
+        },
+        "pluginVersion": "7.5.3",
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "up",
+            "interval": "",
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Harmony Online",
+        "type": "gauge"
+      },
+      {
+        "datasource": null,
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 10,
+          "x": 6,
+          "y": 1
+        },
+        "id": 6,
+        "options": {
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "text": {}
+        },
+        "pluginVersion": "7.5.3",
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "promhttp_metric_handler_requests_in_flight",
+            "hide": true,
+            "instant": false,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "Pending"
+          },
+          {
+            "exemplar": true,
+            "expr": "rate(promhttp_metric_handler_requests_total[5m])",
+            "hide": false,
+            "instant": false,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "Total"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Metric Handler",
+        "type": "gauge"
+      }
+    ],
+    "refresh": false,
+    "schemaVersion": 27,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Harmony Dashboard",
+    "uid": "V6MHr8_Gk",
+    "version": 5
+  }
+```
 
