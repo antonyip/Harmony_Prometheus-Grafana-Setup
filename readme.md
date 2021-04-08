@@ -71,11 +71,14 @@ hmy_stream_setup_stream_duration_count{topic="harmony/sync/localnet/0/1.0.0"} 78
 ```
 
 # Setup of Prometheus
-7. Download and Unzip Prometheus from https://prometheus.io/download/
+1. Download and Unzip Prometheus from https://prometheus.io/download/
+```
+user@ubuntu:~/Downloads$ tar -xvzf prometheus-2.11.1.linux-amd64.tar.gz
+```
 
-8. Change Configuration Settings for Prometheus  
-For me, my harmony node is running on "192.168.106.143"  
-Change your settings to fit what you need.  
+2. Change Configuration Settings for Prometheus.
+For me, my harmony node is running on "192.168.106.143"
+Change your settings to fit what you need.
 ```
 # my global config
 global:
@@ -115,25 +118,63 @@ user@ubuntu:~/Downloads/prometheus-2.26.0.linux-amd64$ ./prometheus
 ```
 
 
-9. Test that the Prometheus site is working
+3. Test that the Prometheus site is working
 ```
 Visit http://192.168.106.144:9090 -> Remember that you need to use your own prometheus server ip  
 You can enter up in the execute as shown in the picture below
 ```
 ![Prometheus](./img/prometheus.png)
 
+## Installing Prometheus As A Service
+1. Create a file
+```
+/etc/systemd/system/prometheus.service
+```
+
+2. Paste the following code
+```
+[Unit]
+Description=Prometheus Server
+Documentation=https://prometheus.io/docs/introduction/overview/
+After=network-online.target
+
+[Service]
+User=root
+Restart=on-failure
+
+#Change this line if you download the 
+#Prometheus on different path user
+
+ExecStart=~/Downloads/prometheus-2.26.0.linux-amd64/prometheus
+
+[Install]
+WantedBy=multi-user.target
+```
+
+3. Run the following Commands
+```
+user@ubuntu:~$ sudo systemctl daemon-reload
+user@ubuntu:~$ sudo systemctl start prometheus
+```
+
+
 # Setup of Grafana
-10. Download - https://grafana.com/grafana/download
+1. Download - https://grafana.com/grafana/download  
 ```
 user@ubuntu:~$ sudo apt-get install -y adduser libfontconfig1
 user@ubuntu:~$ wget https://dl.grafana.com/oss/release/grafana_7.5.3_amd64.deb
 user@ubuntu:~$ sudo dpkg -i grafana_7.5.3_amd64.deb
-user@ubuntu:~$ sudo /bin/systemctl daemon-reload
-user@ubuntu:~$ sudo /bin/systemctl enable grafana-server
-user@ubuntu:~$ sudo /bin/systemctl start grafana-server
 ```
 
-11. Test that grafana works
+## Installing Grafana As A Service
+2. Run the following Commands  
+```
+user@ubuntu:~$ sudo systemctl daemon-reload
+user@ubuntu:~$ sudo systemctl enable grafana-server
+user@ubuntu:~$ sudo systemctl start grafana-server
+```
+
+3. Test that grafana works
 ```
 Browser:  http://192.168.106.144:3000
 default
@@ -142,46 +183,46 @@ password: admin
 ```
 ![Grafana](./img/grafana.png)
 
-12. Add Prometheus as a Data Source  
+4. Add Prometheus as a Data Source  
 ![Prometheus Data](./img/prom_data.png)
 
 # Setup of Telegram Alerts
-13. Search for "chat id echo"  
+1. Search for "chat id echo"  
 ![Chat ID Echo](./img/chatid.png)
 
-14. Get your ChatID by typing start  
+1. Get your ChatID by typing start  
 ![Chat ID Echo](./img/chatid_start.png)
 
-15. Search for Botfather on twitter  
+1. Search for Botfather on twitter  
 ![BotFather](./img/botfather.png)
 
-16. Make a new bot and get the api token  
+1. Make a new bot and get the api token  
 ![New Bot](./img/newbot.png)
 
-17. Start your bot  
+1. Start your bot  
 ![Start Bot](./img/startbot.png)
 
-18. Enter details into grafana page  
+1. Enter details into grafana page  
 ![grafana details](./img/grafana_telegram.png)
 
-19. Send the test Alert  
+1. Send the test Alert  
 ![Start Bot](./img/test_telegram.png)
 
 # Setup of Discord Alerts  
-20. Create a Webook in your server  
+1. Create a Webook in your server  
 ![Webhook](./img/discord_webhook.png)
 
-21. Enter details into grafana page  
+1. Enter details into grafana page  
 ![grafana details](./img/grafana_discord.png)
 
-22. Send the test Alert  
+1. Send the test Alert  
 ![grafana discord test](./img/grafana_test.png)
 
 # Importing a grafana dashboard
-23. Import my dashboard here..  
+1. Import my dashboard here..  
 ![grafana discord test](./img/importdashboard.png)
 
-24. copy and paste the hmy.json into panel.json and upload it to see what I created.  
+1. copy and paste the hmy.json into panel.json and upload it to see what I created.  
 ```
 {
     "annotations": {
