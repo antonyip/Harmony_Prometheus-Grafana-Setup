@@ -2,7 +2,8 @@
 1. golang installed - https://golang.org/
 2. Docker Installed - https://docs.docker.com/engine/install/ubuntu/
 
-# Setup of Harmony Node
+# Setup of Harmony Node  
+**If you are using a vps, follow the vps guide below instead**
 1. Verification of golang Installed
 ```
 user@ubuntu:~$ export PATH=$PATH:/usr/local/go/bin
@@ -71,7 +72,17 @@ hmy_stream_setup_stream_duration_sum{topic="harmony/sync/localnet/0/1.0.0"} 1.28
 hmy_stream_setup_stream_duration_count{topic="harmony/sync/localnet/0/1.0.0"} 783
 ```
 
-# Setup of Prometheus
+# Harmony Node on VPS Setup Steps
+1. Follow this guide
+```
+https://docs.harmony.one/home/network/validators/node-setup/installing-updating/installing-node/using-binary
+```
+
+2. Expose Port 9900 on your VPS so that Prometheus is able to query the harmony node later.
+
+# Setup of Prometheus  
+Here we will assume that you are using a different computer for monitoring your vps.  
+You can also install it on the same vps, just pay attention to the ips that you will need to enter.
 1. Download and Unzip Prometheus from https://prometheus.io/download/
 ```
 user@ubuntu:~/Downloads$ tar -xvzf prometheus-2.11.1.linux-amd64.tar.gz
