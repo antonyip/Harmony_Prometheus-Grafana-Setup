@@ -29,7 +29,8 @@ user@ubuntu:~$ make clean
 user@ubuntu:~$ docker build -t harmony .
 ```
 
-4. Start the Docker Container
+4. Start the Docker Container  
+Make sure to open the correct ports if you are using a vps. You will need to open port 9900 like I did on the docker container.
 ```
 user@ubuntu:~$ docker rm harmony # Remove old docker container
 user@ubuntu:~$ docker run --name harmony -it -p "9900:9900" -v "$(go env GOPATH)/src/github.com/harmony-one/harmony:/root/go/src/github.com/harmony-one/harmony" harmony /bin/bash
@@ -128,7 +129,7 @@ You can enter up in the execute as shown in the picture below
 ## Installing Prometheus As A Service
 1. Create a file
 ```
-/etc/systemd/system/prometheus.service
+sudo vi /etc/systemd/system/prometheus.service
 ```
 
 2. Paste the following code
@@ -154,9 +155,15 @@ WantedBy=multi-user.target
 3. Run the following Commands
 ```
 user@ubuntu:~$ sudo systemctl daemon-reload
+user@ubuntu:~$ sudo chmod 755 /etc/systemd/system/prometheus.service
+user@ubuntu:~$ sudo systemctl enable prometheus
 user@ubuntu:~$ sudo systemctl start prometheus
 ```
 
+4. Check the status
+```
+user@ubuntu:~$ sudo systemctl status prometheus
+```
 
 # Setup of Grafana
 1. Download - https://grafana.com/grafana/download  
